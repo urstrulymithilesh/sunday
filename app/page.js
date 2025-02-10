@@ -1,18 +1,17 @@
-"use client";  // ✅ Required for useRouter & useEffect to work
+export const metadata = {
+  title: "SUNDAY",
+  description: "A simple authentication app with Next.js and Firebase",
+};
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-
-export default function Home() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace("/login"); // ✅ Redirects to login without history push
-  }, []);
-
+export default function RootLayout({ children }) {
   return (
-    <div className="flex h-screen justify-center items-center bg-white text-black">
-      <h1 className="text-3xl font-bold">Redirecting to Login...</h1>
-    </div>
+    <html lang="en">
+      <head>
+        <title>SUNDAY</title>
+      </head>
+      <body className="bg-white text-black h-screen flex items-center justify-center">
+        {children}
+      </body>
+    </html>
   );
 }

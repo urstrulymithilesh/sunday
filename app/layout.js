@@ -9,7 +9,9 @@ export default function RootLayout({ children }) {
       <head>
         <title>SUNDAY</title>
       </head>
-      <body>{children}</body>
+      <body className="bg-white text-black h-screen flex items-center justify-center">
+        {children}
+      </body>
     </html>
   );
 }
