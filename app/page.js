@@ -9,5 +9,5 @@ export default function Home() {
     router.push("/login"); // Redirects to login page automatically
   }, []);
 
-  return null; // Empty page since it's redirecting
+  return null; // Prevents rendering anything on the homepage
 }
