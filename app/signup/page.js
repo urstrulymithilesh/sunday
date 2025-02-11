@@ -19,7 +19,7 @@ export default function Signup() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setTimeout(() => {
-        router.push("/dashboard"); // ✅ Redirects smoothly after animation
+        router.push("/dashboard");
       }, 1500);
     } catch (err) {
       setError("Signup failed. Please try again.");
@@ -29,10 +29,10 @@ export default function Signup() {
 
   return (
     <div className="flex h-screen items-center justify-center bg-gradient-to-br from-gray-100 to-gray-300">
-      <div className="w-[400px] p-8 border border-gray-300 rounded-2xl shadow-2xl bg-white animate-slideIn transition-all duration-500">
-        <h2 className="text-4xl font-extrabold mb-6 text-center text-gray-900 animate-fadeIn">Sign Up</h2>
+      <div className="w-[400px] p-8 border border-gray-300 rounded-2xl shadow-2xl bg-white animate-fadeIn">
+        <h2 className="text-4xl font-extrabold mb-6 text-center text-gray-900">Sign Up</h2>
         
-        {error && <p className="text-red-600 text-lg text-center animate-shake">{error}</p>}
+        {error && <p className="text-red-600 text-lg text-center">{error}</p>}
         
         <input
           type="email"
@@ -58,13 +58,6 @@ export default function Signup() {
         >
           {loading ? "Signing up..." : "Sign Up"}
         </button>
-
-        <p
-          className="text-lg mt-4 text-center cursor-pointer text-gray-700 hover:underline transition-all duration-300"
-          onClick={() => router.push("/login")}
-        >
-          Already have an account? <span className="font-semibold">Login</span>
-        </p>
       </div>
     </div>
   );

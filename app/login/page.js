@@ -19,7 +19,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setTimeout(() => {
-        router.push("/dashboard"); // ✅ Redirects smoothly after animation
+        router.push("/dashboard"); // ✅ Smooth redirect
       }, 1500);
     } catch (err) {
       setError("Invalid email or password. Please try again.");
@@ -29,10 +29,10 @@ export default function Login() {
 
   return (
     <div className="flex h-screen items-center justify-center bg-gradient-to-br from-gray-100 to-gray-300">
-      <div className="w-[400px] p-8 border border-gray-300 rounded-2xl shadow-2xl bg-white animate-slideIn transition-all duration-500">
-        <h2 className="text-4xl font-extrabold mb-6 text-center text-gray-900 transition-all duration-300 animate-fadeIn">Login</h2>
+      <div className="w-[400px] p-8 border border-gray-300 rounded-2xl shadow-2xl bg-white animate-fadeIn">
+        <h2 className="text-4xl font-extrabold mb-6 text-center text-gray-900">Login</h2>
         
-        {error && <p className="text-red-600 text-lg text-center animate-shake">{error}</p>}
+        {error && <p className="text-red-600 text-lg text-center">{error}</p>}
         
         <input
           type="email"
