@@ -2,10 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure the body is not blank */
 html, body {
-  @apply bg-white text-black h-full w-full flex items-center justify-center;
+  @apply bg-white text-black h-screen flex items-center justify-center;
 }
 
+/* Improve heading styles */
 h1 {
-  @apply text-4xl font-bold;
+  @apply text-4xl font-bold animate-fadeIn;
+}
+
+/* Add basic transition effects */
+.animate-fadeIn {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
