@@ -1,19 +1,25 @@
 "use client";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../../firebase";
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 export default function Dashboard() {
   const router = useRouter();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user) {
-        router.push("/login");
+        router.replace("/login"); // ✅ Redirect if not logged in
+      } else {
+        setUser(user);
       }
     });
-  }, []);
+
+    return () => unsubscribe();
+  }, [router]);
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -21,16 +27,21 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex h-screen flex-col justify-center items-center bg-white text-black transition-all duration-300">
-      <h1 className="text-5xl font-bold mb-6 text-center animate-fadeIn">
-        "Help Millions, <br /> To Make Millions."
-      </h1>
-      <button
-        className="mt-4 p-4 bg-red-600 text-white text-xl font-semibold rounded-xl hover:bg-red-500 transition-all duration-500"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
+    <div className="flex h-screen items-center justify-center bg-gray-100">
+      <div className="w-[500px] p-10 border border-gray-300 rounded-2xl shadow-2xl bg-white animate-slideIn transition-all duration-500">
+        <h2 className="text-4xl font-extrabold mb-6 text-center text-gray-900 animate-fadeIn">
+          Welcome, {user?.email || "User"} 🎉
+        </h2>
+        <p className="text-lg text-gray-700 text-center mb-6">
+          "Help Millions, To Make Millions."
+        </p>
+        <button
+          className="w-full p-3 bg-red-600 text-white text-lg font-semibold rounded-lg hover:bg-red-700 transition-all duration-300"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
